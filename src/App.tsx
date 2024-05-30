@@ -6,16 +6,23 @@ import { Genre } from "./hooks/useGenres";
 import { useState } from "react";
 import PlatformSelector from "./components/PlatformSelector";
 import { Platform } from "./hooks/useGames";
+
+export interface GameQuery {
+  genre: Genre | null;
+  platform: Platform | null;
+}
+
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
-  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
+  const [gameQuery, setGameQuery] = useState<GameQuery>({ genre: null, platform: null });
 
   const onSelectGenre = (genre: Genre) => {
-    setSelectedGenre(_ => genre);
+    setGameQuery(gameQuery => ({...gameQuery, genre }));
   }
+
   const onSelectPlatform = (platform: Platform) => {
-    setSelectedPlatform(_ => platform);
+    setGameQuery(gameQuery => ({...gameQuery, platform}));
   }
+  
   return (
     <>
       <Grid
@@ -24,22 +31,30 @@ function App() {
           lg: `"nav nav" "aside main"`, //1024px
         }}
         templateColumns={{
-          base: '1fr',
-          lg: '200px 1fr',
+          base: "1fr",
+          lg: "200px 1fr",
         }}
       >
         <GridItem area="nav">
-          <NavBar/>
+          <NavBar />
         </GridItem>
         <Show above="lg">
-          <GridItem area="aside" padding='10px'>
-            <GenreList selectedGenre={selectedGenre} onSelectGenre={onSelectGenre}/>
+          <GridItem area="aside" padding="10px">
+            <GenreList
+              selectedGenre={gameQuery.genre}
+              onSelectGenre={onSelectGenre}
+            />
           </GridItem>
         </Show>
 
         <GridItem area="main">
-          <PlatformSelector selectedPlatform={selectedPlatform} onSelectPlatform={onSelectPlatform}/>
-          <GameGrid selectedGenre={selectedGenre} selectedPlatform={selectedPlatform}/>
+          <PlatformSelector
+            selectedPlatform={gameQuery.platform}
+            onSelectPlatform={onSelectPlatform}
+          />
+          <GameGrid
+            gameQuery={gameQuery}
+          />
         </GridItem>
       </Grid>
     </>
