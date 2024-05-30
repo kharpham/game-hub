@@ -17,7 +17,7 @@ export interface GameQuery {
 }
 
 function App() {
-  const [gameQuery, setGameQuery] = useState<GameQuery>({ genre: null, platform: null, sort: '' });
+  const [gameQuery, setGameQuery] = useState<GameQuery>({ genre: null, platform: null, sort: '', searchText: '' });
 
   const onSelectGenre = (genre: Genre) => {
     setGameQuery(gameQuery => ({...gameQuery, genre }));
