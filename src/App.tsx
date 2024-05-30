@@ -27,8 +27,6 @@ function App() {
   const onSelectedOrder = (sort: string) => {
     setGameQuery(gameQuery => ({...gameQuery, sort}));
   }
-
-
   
   return (
     <>
