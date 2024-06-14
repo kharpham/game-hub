@@ -14,10 +14,9 @@ const apiClient = new APIClient<Genre>("/genres");
 const useGenres = () => {
     return useQuery({
         queryKey: ['genres'],
-        queryFn: apiClient.getAll,
+        queryFn: () => apiClient.getAll(),
         staleTime: 24 * 60 * 60 * 1000, // 24 hours
-        initialData: {count: Genres.length, results: Genres, next: null},
+        initialData: Genres,
     })
 }
-
 export default useGenres;
