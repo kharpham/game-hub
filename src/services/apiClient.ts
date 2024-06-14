@@ -9,6 +9,7 @@ const axiosInstance = axios.create({
 export interface FetchResponse<T> {
   count: number;
   results: T[];
+  next: string | null;
 }
 
 export default class APIClient<T> {
@@ -21,5 +22,10 @@ export default class APIClient<T> {
     return axiosInstance
       .get<FetchResponse<T>>(this.endpoint, config)
       .then((res) => res.data);
+  }
+  getAllGame(config?: AxiosRequestConfig) {
+    return axiosInstance
+      .get<FetchResponse<T>>(this.endpoint, config)
+      .then((res) => res.data.results);
   }
 }
