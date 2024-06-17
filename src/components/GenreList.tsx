@@ -8,13 +8,14 @@ import {
   Skeleton,
   SkeletonText,
 } from "@chakra-ui/react";
-import useGenres, { Genre } from "../hooks/useGenres";
+import useGenres from "../hooks/useGenres";
+import { Genre } from "../entities/Genre";
 import getCroppedImageUrl from "../services/imageUrl";
 import useGameQueryStore from "../store";
 
 const GenreList = () => {
-  const genreId = useGameQueryStore(s => s.gameQuery.genreId);
-  const setGenreId = useGameQueryStore(s => s.setGenreId);
+  const genreId = useGameQueryStore((s) => s.gameQuery.genreId);
+  const setGenreId = useGameQueryStore((s) => s.setGenreId);
   const { data, error, isLoading } = useGenres();
   const results = data?.results;
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
