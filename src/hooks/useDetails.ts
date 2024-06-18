@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
 import { axiosInstance } from "../services/apiClient";
-import { Game } from "../entities/Game";
+import Game from "../entities/Game";
 
 // export interface GameDetail {
 //   name: string;
