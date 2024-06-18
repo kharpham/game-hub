@@ -3,21 +3,23 @@ import useDetails from '../hooks/useDetails'
 import { useParams } from 'react-router-dom';
 import ExpandableText from '../components/ExpandableText';
 import GameAttributes from '../components/GameAttributes';
+import GameTrailer from '../components/GameTrailer';
 
 const GameDetailPage = () => {
   const {id} = useParams();
-  const {data, isLoading, error} = useDetails(id!);
+  const {data: game, isLoading, error} = useDetails(id!);
   
   if (isLoading) return <Spinner/>;
-  if (error || !data) throw Error;
+  if (error || !game) throw Error;
   return (
     <Box>
-      <Heading>{data?.name}</Heading>
+      <Heading>{game?.name}</Heading>
       <ExpandableText>
-        {data?.description_raw || ""}
+        {game?.description_raw || ""}
       </ExpandableText>
-      <GameAttributes game={data}></GameAttributes>
-    </Box>
+      <GameAttributes game={game}></GameAttributes>
+      <GameTrailer gameId={game.id}/>
+    </Box> 
   )
 }
 

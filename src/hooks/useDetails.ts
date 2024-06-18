@@ -10,7 +10,7 @@ import { Game } from "../entities/Game";
 
 const useDetails = (slug: string) => {
   return useQuery({
-    queryKey: ["game"],
+    queryKey: ["game", slug],
     queryFn: () =>
       axiosInstance.get<Game>(`games/${slug}`).then((res) => res.data),
     staleTime: ms("24h"),
